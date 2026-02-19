@@ -1,0 +1,695 @@
+\documentclass[10pt, aspectratio=169]{beamer}
+
+
+\usepackage{very-plain-beamer}
+\graphicspath{{../../figures/}}
+\usepackage{tikz-cd}
+
+
+\usepackage{ragged2e}
+\setbeamertemplate{footnote}{
+  \parindent 1em\noindent%
+  \raggedright
+  \hbox to 1.8em{\hfil\insertfootnotemark}\justifying\insertfootnotetext\par%
+}
+
+\newcommand{\titlecolor}[1]{{\usebeamercolor[fg]{title}#1}}
+
+
+\addbibresource{../../references.bib}
+
+
+%title and author----------------------------------------------------
+\title[Geometry and Dynamics of Learning]{Geometry and Dynamics of Learning}
+\author[Bertics \& Pereira]{Abby Bertics $\quad\quad$ Lu\'is F. Pereira\\{\scriptsize abertics@ucsb.edu $\quad\quad$ luisfpereira@ucsb.edu}\\{\scriptsize Geometric Intelligence Lab @ UCSB}}
+\date{{\small WiMSoCal 2026\\Symposium for Broadening Participation in Mathematics in Southern California\\February 21, 2026}}
+
+\titlegraphic{\begin{flushleft}\includegraphics[width=5em]{gil_logo.jpeg}\end{flushleft}}
+
+%faster compilation--------------------------------------------------
+%\includeonlyframes{current}
+
+
+
+
+\begin{document}
+
+
+\begin{frame}
+
+\titlepage
+
+\end{frame}
+
+
+
+\begin{frame}[noframenumbering, plain]
+
+\begin{flushleft}
+\titlecolor{\Large Motivation:\\Sloppiness and identifiability}
+\end{flushleft}
+
+\end{frame}
+
+
+\begin{frame}{The geometry of sloppy models}\footcite{quinn2023}
+\begin{figure}
+	\includegraphics[width=1.\textwidth]{sloppiness_quinn2023.png}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Eigenvalues profile}
+
+Motivates Koopman?
+
+\end{frame}
+
+
+
+\begin{frame}[noframenumbering, plain]
+
+\begin{flushleft}
+\titlecolor{\Large Geometry:\\Fisher information and nonlinear least squares}
+\end{flushleft}
+
+\end{frame}
+
+
+
+\begin{frame}{Distance between distributions}
+
+
+\begin{columns}
+
+\begin{column}{.4\textwidth}
+\begin{figure}
+	\includegraphics[width=1.\textwidth]{info_geom_normal.png}
+\end{figure}
+\end{column}
+
+
+\begin{column}{.4\textwidth}
+\begin{figure}
+	\includegraphics[width=1.\textwidth]{geodesic_parameter_space.jpg}
+\end{figure}
+\end{column}
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+\begin{frame}{Fisher information}
+
+\textbf{Fisher information}: way of measuring the \textit{amount of information} that an observable random variable $X$ carries about \textit{unknown parameters} $\theta$ of a distribution that models $X$.
+
+
+% TODO: add other expressions?
+
+\vspace{2ex}
+
+
+$$
+I(\theta)=-E_\theta\left[\nabla_\theta^2 \log p_\theta(X)\right]
+$$
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Likelihood function}
+
+Dominated parametric statistical model 
+
+$$
+(\Omega, \mathcal{F}, \mathcal{P})
+$$
+
+with
+
+
+$$
+\mathcal{P}=\left\{P_{\theta}: \theta \in \Theta  \subseteq \mathbb{R}^d \right\},
+\quad p_\theta=\frac{d P_\theta}{d \mu}
+$$
+
+
+Likelihood:
+
+$$
+L(\theta ; x) := p_\theta(x)
+$$
+
+
+\end{frame}
+
+
+
+\begin{frame}{Score}
+
+$$
+s(\theta, x) =\nabla_\theta \log p_\theta(x)
+$$
+
+\vspace{3ex}
+
+As a deterministic function of the parameters:
+
+$$
+s(\theta; x)=\nabla_\theta \log p_\theta(x)
+$$
+
+
+\vspace{3ex}
+
+As a random variable. For fixed $\theta$, if $X \sim P_\theta$:
+
+$$
+S_\theta:=s(\theta, X)
+$$
+
+
+\end{frame}
+
+
+
+\begin{frame}{Fisher information matrix}
+
+As the covariance matrix of the score $S_\theta$:
+
+$$
+I(\theta)=\operatorname{cov}\left(S_{\theta}\right) \in \mathbb{R}^{d\times d}
+$$
+
+
+\vspace{3ex}
+
+
+Under certain regularity conditions, $E[S_\theta] = 0$:
+
+$$
+I(\theta)=E[S_\theta S_\theta^\top]
+$$
+
+
+\vspace{3ex}
+
+
+In components:
+
+$$
+I_{i j}(\theta)=E_\theta\left[\frac{\partial}{\partial \theta_i} \log p_\theta(X) \frac{\partial}{\partial \theta_j} \log p_\theta(X)\right]
+$$
+
+
+\end{frame}
+
+
+
+\begin{frame}{Fisher information matrix from Hessian}
+
+
+Fisher as the negative expected value of the Hessian of the log-likelihood:
+
+
+\begin{equation*}
+\begin{split}
+I(\theta)&=-E_\theta[H_l(\theta)]\\
+&=-E_\theta\left[\nabla_\theta^2 \log p_\theta(X)\right]
+\end{split}
+\end{equation*}
+
+
+
+In components:
+
+$$
+I_{ij}(\theta)=-E_\theta\left[\frac{\partial^2}{\partial \theta_i \partial \theta_j} \log p_\theta(X)\right]
+$$
+
+
+\end{frame}
+
+
+
+\begin{frame}{Example: univariate normal}
+
+$X \sim N(\mu, \sigma^2)$:
+
+$$
+f(x; \mu, \sigma)=\frac{1}{\sigma \sqrt{2 \pi}} \operatorname{exp}\left(-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right)
+$$
+
+
+\vspace{3ex}
+
+Fisher information matrix:
+
+$$
+I(\mu, \sigma)=\left(\begin{array}{cc}
+\sigma^{-2} & 0 \\
+0 & 2 \sigma^{-2}
+\end{array}\right)
+$$
+
+
+\vspace{3ex}
+
+Riemannian metric:
+
+$$
+g(u, v)=u^\top I(\mu, \sigma) v
+$$
+
+\end{frame}
+
+
+\begin{frame}{Example: isotropic multivariate normal}
+
+$X \sim \mathcal{N}\left(\mu, \sigma^2 I_p\right)$:
+
+$$
+f(x ; \mu, \sigma)=(2 \pi)^{-p / 2} \sigma^{-p} \exp \left(-\frac{1}{2 \sigma^2}(x-\mu)^{\top}(x-\mu)\right)
+$$
+
+
+\vspace{3ex}
+
+Fisher information matrix:
+
+
+$$
+I(\mu, \sigma)=
+\left(\begin{array}{cc}
+\frac{1}{\sigma^2} I_p & 0_{p \times 1} \\
+0_{1 \times p} & \frac{2 p}{\sigma^2}
+\end{array}\right) \quad \in \mathbb{R}^{(p+1) \times(p+1)}
+$$
+
+
+\end{frame}
+
+
+
+\begin{frame}{Nonlinear Gaussian model}
+
+Observation model ($y_i \in \mathbb{R}$, $x_i \in \mathbb{R}^p$):
+
+$$
+y_i=f(\beta; x_i)+\varepsilon_i
+$$
+
+with $\varepsilon_i \sim \mathcal{N}\left(0, \sigma^2\right)$
+and $f$ nonlinear.
+
+
+\vspace{3ex}
+
+$m$ iid measurements ($y \in \mathbb{R}^m$, $X \in \mathbb{R}^{m \times p}$):
+
+$$
+y = f(\beta; X) + \varepsilon = \sum_i^m f(\beta; x_i)+\varepsilon_i
+$$
+
+with $\varepsilon \sim \mathcal{N}\left(0, \sigma^2 I_m\right)$.
+
+
+\vspace{3ex}
+
+
+$$
+y \mid \beta \sim \mathcal{N}\left(f(\beta; X), \sigma^2 I_m\right)
+$$
+
+
+\end{frame}
+
+
+
+\begin{frame}{Nonlinear Gaussian model: likelihood and Fisher}
+
+\begin{equation*}
+\begin{split}
+L(\beta; y, X, \sigma)&=(2 \pi)^{-p / 2} \sigma^{-p} \exp \left(-\frac{1}{2 \sigma^2}\|y-f(\beta ; X)\|_2^2\right)\\
+&=\prod_{i=1}^m \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left(-\frac{\left(y_i-f\left(\beta ; x_i\right)\right)^2}{2 \sigma^2}\right)
+\end{split}
+\end{equation*}
+
+
+\vspace{3ex}
+
+
+Log-likelihood:
+
+$$
+\ell(\beta; y, X, \sigma)=-\frac{m}{2} \log \left(2 \pi \sigma^2\right)-\frac{1}{2 \sigma^2} \sum_{i=1}^m\left(y_i-f\left(\beta ; x_i\right)\right)^2
+$$
+
+\vspace{3ex}
+
+
+Fisher information matrix:
+
+$$
+I(\beta) = \frac{1}{\sigma^2} J(\beta)^{\top} J(\beta)
+$$
+
+
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{MLE $\Leftrightarrow$ NLS}
+
+$$
+\ell(\beta; y, X, \sigma)=-\frac{m}{2} \log \left(2 \pi \sigma^2\right)-\frac{1}{2 \sigma^2} \sum_{i=1}^m\left(y_i-f\left(\beta ; x_i\right)\right)^2
+$$
+
+
+\vspace{3ex}
+
+Equivalence between maximum likelihood estimation and nonlinear least squares:
+
+\begin{equation*}
+\begin{split}
+\arg \max_\beta \ell(\beta; y, X, \sigma) &= \arg \max_\beta -\frac{1}{2 \sigma^2} \sum_{i=1}^m\left(y_i-f\left(\beta ; x_i\right)\right)^2\\
+&= \arg \min_\beta \frac{1}{2 \sigma^2} \sum_{i=1}^m\left(y_i-f\left(\beta ; x_i\right)\right)^2
+\end{split}
+\end{equation*}
+
+
+\end{frame}
+
+
+\begin{frame}{Sum of squared residuals}
+
+\begin{equation*}
+\begin{split}
+C(\beta; y, X, \sigma) &= \frac{1}{2 \sigma^2} \sum_i^m (y_i - f(\beta; x_i))^2\\
+&=\frac{1}{2 \sigma^2} \sum_i^m r(\beta; y_i, x_i)^2
+\end{split}
+\end{equation*}
+
+
+
+Jacobian:
+
+$$
+\nabla C(\beta)=\frac{1}{\sigma^2} J(\beta)^{\top} r(\beta)
+$$
+
+
+
+Hessian:
+
+$$
+\nabla^2 C(\beta)=\frac{1}{\sigma^2}\left(J(\beta)^{\top} J(\beta)-\sum_{i=1}^m r_i(\beta) \nabla^2 r_i(\beta)\right)
+$$
+
+
+
+\end{frame}
+
+
+
+\begin{frame}{Minimization of sum of squared residuals}
+
+\vspace{-2ex}
+
+
+
+$$
+C(\beta) = \frac{1}{2 \sigma^2} \sum_i^m r(\beta)^2, \quad \nabla C(\beta)=\frac{1}{\sigma^2} J(\beta)^{\top} r(\beta), \quad \nabla^2 C(\beta)=\frac{1}{\sigma^2}\left(J(\beta)^{\top} J(\beta)+\sum_i r_i(\beta) \nabla^2 r_i(\beta)\right)
+$$
+
+
+
+Gradient descent:
+\vspace{-2ex}
+
+\begin{columns}
+
+\begin{column}{.35\textwidth}
+
+
+$$
+\beta_{k+1}=\beta_k - \eta \nabla C\left(\beta_k\right)
+$$
+
+\end{column}
+
+\begin{column}{.65\textwidth}
+
+$$
+\beta_{k+1}=\beta_k - \eta \frac{1}{\sigma^2} J^{\top} r
+$$
+
+\end{column}
+
+\end{columns}
+
+
+\vspace{3ex}
+
+Newton's method:
+\vspace{-2ex}
+
+\begin{columns}
+
+\begin{column}{.35\textwidth}
+
+\begin{equation*}
+\begin{split}
+\beta_{k+1}&=\beta_k+\eta p_k\\
+\nabla^2 C\left(\beta_k\right) p_k&=-\nabla C\left(\beta_k\right)
+\end{split}
+\end{equation*}
+
+\end{column}
+
+
+\begin{column}{.65\textwidth}
+$$
+\left(J^{\top} J +\sum_i r_i \nabla^2 r_i\right) p_k = J^{\top} r 
+$$
+\end{column}
+
+\end{columns}
+
+
+
+\vspace{3ex}
+
+Gauss-Newton:
+\vspace{-2ex}
+
+\begin{columns}
+
+\begin{column}{.35\textwidth}
+
+\begin{equation*}
+\begin{split}
+\beta_{k+1}&=\beta_k+\eta p_k\\
+H_{\mathrm{GN}}\left(\beta_k\right) p_k&=-\nabla C\left(\beta_k\right)
+\end{split}
+\end{equation*}
+
+\end{column}
+
+
+\begin{column}{.65\textwidth}
+
+$$
+J^{\top} J  p_k= J^{\top} r 
+$$
+
+\end{column}
+
+\end{columns}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Natural gradient descent}
+
+
+Update rule:
+
+\begin{equation*}
+\begin{split}
+\beta_{k+1}&=\beta_k+\eta p_k\\
+I\left(\beta_k\right) p_k&=-\nabla C\left(\beta_k\right)
+\end{split}
+\end{equation*}
+
+
+But, $I(\beta) = \frac{1}{\sigma^2} J^{\top} J$:
+
+$$
+J^{\top} J p_k= J^{\top} r 
+$$
+
+
+\vspace{3ex}
+
+\begin{center}
+For nonlinear least squares with Gaussian noise:
+
+
+Natural gradient $\equiv$ Gauss-Newton
+
+\end{center}
+
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Example: Linear Gaussian model}
+
+$$
+f(\beta; X) = X \beta
+$$
+
+
+$$
+J= X, \quad  H=-\frac{1}{\sigma^2} X^{\top} X, \quad I = \frac{1}{\sigma^2} X^{\top} X
+$$
+
+
+\vspace{3ex}
+
+
+\begin{center}
+For linear least squares with Gaussian noise:
+
+
+Natural gradient $\equiv$ Gauss-Newton $\equiv$ Newton
+
+\end{center}
+
+
+% TODO: check signs and Jacobian of what
+
+\end{frame}
+
+
+\begin{frame}{A numerical example}
+
+Pick equation and show some trajectories?
+
+\end{frame}
+
+
+
+\begin{frame}{Wrapping up}
+
+
+\begin{itemize}
+\item reinterpretation of algorithms
+
+
+
+\begin{itemize}
+
+
+
+\item led to modified Gauss-Newton and Levenberg-Marquardt \footcite{transtrum2011}
+
+
+
+\end{itemize} 
+
+
+\item awareness of assumptions
+
+
+\begin{itemize}
+\item what if different noise model
+\end{itemize}
+
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[noframenumbering, plain]
+
+\begin{flushleft}
+\titlecolor{\Large Dynamics:\\Koopman operator theory}
+\end{flushleft}
+
+\end{frame}
+
+
+
+\begin{frame}{Algorithms as dynamical systems}
+
+\end{frame}
+
+
+
+
+\begin{frame}{The Koopman operator}
+
+\end{frame}
+
+
+\begin{frame}{Optimization and isostables}
+
+% TODO: basins of attraction?
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[noframenumbering, plain]
+    \begin{flushright}
+        \includegraphics[width=5em]{gil_logo.jpeg}
+    \end{flushright}
+
+    \begin{flushleft}
+        \huge Thank you for your attention!
+    \end{flushleft}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}[noframenumbering,plain,allowframebreaks]
+\renewcommand*{\bibfont}{\footnotesize}
+
+\printbibliography
+
+\end{frame}
+
+
+
+
+
+
+\end{document}

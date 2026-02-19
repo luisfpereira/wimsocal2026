@@ -1,0 +1,90 @@
+%theme----------------------------------------------------------
+%\usepackage{beamerthemesplit}
+
+\mode<presentation>
+{
+
+\usetheme{default}
+\setbeamertemplate{headline}{}
+\usecolortheme{dolphin}
+\setbeamercovered{transparent}
+}
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+
+% \usepackage{enumitem}
+% \setlist[itemize, 1]{label=$\bullet$}
+% \setlist[itemize, 2]{label=--}
+
+%presentation related-------------------------------------------
+\usepackage{multicol}
+\usepackage{ragged2e} %justifying
+\apptocmd{\frame}{}{\justifying}{} % Allow optional arguments after frame.
+\usepackage[absolute,overlay]{textpos} %,showboxes
+
+
+%language and characteres---------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{palatino}
+\usefonttheme[onlymath]{serif}
+%---------------------------------------------------------------
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{ulem}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{xpatch}
+\usepackage{graphicx}
+\usepackage[style=authortitle,backend=bibtex]{biblatex}
+
+% for diagrams
+\usepackage[simplified]{pgf-umlcd}
+\usetikzlibrary{math}
+\usepackage{tikz}
+\usetikzlibrary{positioning,fit,calc}
+\usetikzlibrary{arrows.meta}
+
+
+\usepackage{minted}
+
+
+\setminted[python]{fontsize=\small,
+                   fontfamily=serif,
+                   % linenos,
+                   numbersep=2pt,
+                   bgcolor=bg,
+                   framesep=2mm,
+                   python3=true,
+                   tabsize=4,
+                   frame=lines}
+
+
+\hypersetup{colorlinks,
+    citecolor=blue,
+    linkcolor=.,
+    menucolor=white,
+    filecolor=blue,   
+    anchorcolor=blue
+}
+
+
+\xapptobibmacro{cite}{\setunit{\nametitledelim}\printfield{year}}{}{}
+
+
+\DeclareMathOperator*{\argmin}{argmin}
+
+
+\newcommand\Wider[2][2em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
