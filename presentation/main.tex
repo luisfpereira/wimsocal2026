@@ -744,16 +744,54 @@ Natural gradient $\equiv$ Gauss-Newton $\equiv$ Newton
 
 
 
-\begin{frame}{Algorithms as dynamical systems}
+\begin{frame}{Algorithms as (discrete) dynamical systems}
 
+State space $X \subseteq \mathbb{R}^d$, $a: X \to X$:
+
+$$
+x_{n+1}=a\left(x_n\right), n \in \mathbb{N}
+$$
+
+
+
+% TODO: connect with previous slides
 \end{frame}
+
 
 
 
 
 \begin{frame}{The Koopman operator}
 
+Deterministic dynamical system with vector field $v: X \to \mathbb{R}^k$, flow $S_t: X \to X$, initial condition $x_0 \in M$:
+
+$$
+\left.\frac{d}{d t} S_t(x)\right|_{t=0}=v(x), S_0(x)=x_0
+$$
+
+
+Family $\mathcal{K}^t$ indexed by $t \in \mathbb{R}$ of linear operators acting on a suitable function space $\mathcal{F}$ of observables $g: X \to \mathbb{C}$:
+
+
+$$
+\left[\mathcal{K}^t g\right](x):=\left(g \circ S_t\right)(x)
+$$
+
+
 \end{frame}
+
+
+\begin{frame}{Eigenvalues of the Koopman operator}
+
+Eigenvalue $\lambda$ and corresponding eigenfunction $\phi_\lambda \in \mathcal{F}$:
+
+$$
+\left[\mathcal{K}^t \phi_\lambda\right](x)=\left(\phi_\lambda \circ S_t\right)(x)=\lambda^t \phi_\lambda(x), \quad t \in \mathbb{R}^{+}
+$$
+
+
+\end{frame}
+
 
 
 \begin{frame}{Optimization and isostables}
