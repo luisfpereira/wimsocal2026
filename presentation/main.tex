@@ -15,7 +15,7 @@
 \newcommand{\titlecolor}[1]{{\usebeamercolor[fg]{title}#1}}
 
 
-\addbibresource{../../references.bib}
+\addbibresource{references.bib}
 
 
 %title and author----------------------------------------------------
@@ -45,31 +45,154 @@
 \begin{frame}[noframenumbering, plain]
 
 \begin{flushleft}
-\titlecolor{\Large Motivation:\\Sloppiness and identifiability}
+\titlecolor{\Large Motivation:\\Information geometry, Sloppiness, Koopman Operator theory}
+
+% TODO: make better
 \end{flushleft}
 
 \end{frame}
 
 
-\begin{frame}{The geometry of sloppy models}\footcite{quinn2023}
+
+\begin{frame}{Research context}
+
+
+Information geometry\footcite{amari2016}: Amari, Nielsen
+
+\vspace{3ex}
+
+Sloppiness and identifiability\footcite{quinn2023}: Transtrum, Setna
+
+\vspace{3ex}
+
+Operator theory\footcite{dietrich2020}: Mezic, Brunton, Kevrekidis
+
+% TODO: add references
+
+\end{frame}
+
+
+\begin{frame}{Learning influenced by geometry and dynamics}
+
+
+\begin{columns}[T]
+
+\begin{column}{.5\textwidth}
+
+
+Geometry:
+
+\begin{itemize}
+
+\item Model manifold
+
+\item Information geometry
+
+
+\begin{itemize}
+\item Metric: Fisher information
+
+\item Connection
+\end{itemize}
+
+\end{itemize}
+
+\end{column}
+
+
+\begin{column}{.5\textwidth}
+
+Dynamics
+
+\begin{itemize}
+\item nonlinear dynamical system
+
+\item Koopman operator theory
+\begin{itemize}
+\item eigenvalues, eigenfunctions, slow modes
+\item isostables
+\item slow manifolds
+\end{itemize}
+
+\end{itemize}
+
+
+\end{column}
+
+
+\end{columns}
+
+
+\vspace{5ex}
+
+We will: define key concepts, then draw some nice analogies theoretically, then see if those bear out computationally
+
+
+% TODO: rethink sentence
+
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{The geometry of sloppy models\footcite{quinn2023}}
+
 \begin{figure}
 	\includegraphics[width=1.\textwidth]{sloppiness_quinn2023.png}
 \end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Fisher information}
+
+\textbf{Fisher information}: way of measuring the \textit{amount of information} that an observable random variable $X$ carries about \textit{unknown parameters} $\theta$ of a distribution that models $X$.
+
+
+% TODO: add other expressions?
+
+\vspace{2ex}
+
+
+$$
+I(\theta)=-E_\theta\left[\nabla_\theta^2 \log p_\theta(X)\right]
+$$
+
 \end{frame}
 
 
-\begin{frame}{Eigenvalues profile}
 
-Motivates Koopman?
+\begin{frame}{Eigenvalues of the Fisher information matrix in the wild\footcite{quinn2023}}
+
+\begin{figure}
+	\includegraphics[width=0.9\textwidth]{fisher_eigen_quinn2023.png}
+\end{figure}
+
 
 \end{frame}
+
+
+
+
+
+
+
+\begin{frame}{Koopman predicts trajectories\footcite{dietrich2020}}
+\begin{figure}
+	\includegraphics[width=1.\textwidth]{acceleration_dietrich2020.png}
+\end{figure}
+\end{frame}
+
 
 
 
 \begin{frame}[noframenumbering, plain]
 
 \begin{flushleft}
-\titlecolor{\Large Geometry:\\Fisher information and nonlinear least squares}
+\titlecolor{\Large Geometry:\\Information geometry and nonlinear least squares}
 \end{flushleft}
 
 \end{frame}
@@ -100,23 +223,6 @@ Motivates Koopman?
 
 \end{frame}
 
-
-\begin{frame}{Fisher information}
-
-\textbf{Fisher information}: way of measuring the \textit{amount of information} that an observable random variable $X$ carries about \textit{unknown parameters} $\theta$ of a distribution that models $X$.
-
-
-% TODO: add other expressions?
-
-\vspace{2ex}
-
-
-$$
-I(\theta)=-E_\theta\left[\nabla_\theta^2 \log p_\theta(X)\right]
-$$
-
-
-\end{frame}
 
 
 
@@ -588,11 +694,7 @@ Natural gradient $\equiv$ Gauss-Newton $\equiv$ Newton
 \end{frame}
 
 
-\begin{frame}{A numerical example}
 
-Pick equation and show some trajectories?
-
-\end{frame}
 
 
 
@@ -620,6 +722,8 @@ Pick equation and show some trajectories?
 
 \begin{itemize}
 \item what if different noise model
+
+\item rank-deficient Fisher information matrix
 \end{itemize}
 
 \end{itemize}
@@ -660,6 +764,14 @@ Pick equation and show some trajectories?
 
 
 
+\begin{frame}[noframenumbering, plain]
+
+\begin{flushleft}
+\titlecolor{\Large Conclusions and future directions}
+\end{flushleft}
+
+\end{frame}
+
 
 
 
@@ -674,7 +786,6 @@ Pick equation and show some trajectories?
 
 
 \end{frame}
-
 
 
 
