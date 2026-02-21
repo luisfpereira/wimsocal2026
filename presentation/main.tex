@@ -743,6 +743,24 @@ Natural gradient $\equiv$ Gauss-Newton $\equiv$ Newton
 \end{frame}
 
 
+\begin{frame}{Algorithms as dynamical systems}
+
+\begin{columns}
+\begin{column}{0.6\textwidth}
+	$$x_{k+1}=T\left(x_k\right)$$
+	where state space (parameters) $X \subseteq \mathbb{R}^d$, map (update rule) $T: X \to X$, and iteration $k \in \mathbb{N}$
+\end{column}
+\begin{column}{0.4\textwidth}
+    \begin{center}
+     \includegraphics[width=.8\textwidth]{loss-landscape.png}
+     \end{center}
+\end{column}
+\end{columns}
+
+% TODO: connect with previous slides
+\end{frame}
+
+
 
 \begin{frame}{Algorithms as (discrete) dynamical systems}
 
@@ -756,7 +774,6 @@ $$
 
 % TODO: connect with previous slides
 \end{frame}
-
 
 
 
