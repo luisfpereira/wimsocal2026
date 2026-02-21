@@ -518,7 +518,7 @@ $$
 Hessian:
 
 $$
-\nabla^2 C(\beta)=\frac{1}{\sigma^2}\left(J(\beta)^{\top} J(\beta)-\sum_{i=1}^m r_i(\beta) \nabla^2 r_i(\beta)\right)
+\nabla^2 C(\beta)=\frac{1}{\sigma^2}\left(J(\beta)^{\top} J(\beta)+\sum_{i=1}^m r_i(\beta) \nabla^2 r_i(\beta)\right)
 $$
 
 
@@ -575,8 +575,8 @@ Newton's method:
 
 \begin{equation*}
 \begin{split}
-\beta_{k+1}&=\beta_k+\eta p_k\\
-\nabla^2 C\left(\beta_k\right) p_k&=-\nabla C\left(\beta_k\right)
+\beta_{k+1}&=\beta_k- \eta p_k\\
+\nabla^2 C\left(\beta_k\right) p_k&=\nabla C\left(\beta_k\right)
 \end{split}
 \end{equation*}
 
@@ -604,8 +604,8 @@ Gauss-Newton:
 
 \begin{equation*}
 \begin{split}
-\beta_{k+1}&=\beta_k+\eta p_k\\
-H_{\mathrm{GN}}\left(\beta_k\right) p_k&=-\nabla C\left(\beta_k\right)
+\beta_{k+1}&=\beta_k-\eta p_k\\
+H_{\mathrm{GN}}\left(\beta_k\right) p_k&=\nabla C\left(\beta_k\right)
 \end{split}
 \end{equation*}
 
@@ -634,7 +634,7 @@ Update rule:
 
 \begin{equation*}
 \begin{split}
-\beta_{k+1}&=\beta_k+\eta p_k\\
+\beta_{k+1}&=\beta_k-\eta p_k\\
 I\left(\beta_k\right) p_k&=-\nabla C\left(\beta_k\right)
 \end{split}
 \end{equation*}
@@ -673,7 +673,7 @@ $$
 
 
 $$
-J= X, \quad  H=-\frac{1}{\sigma^2} X^{\top} X, \quad I = \frac{1}{\sigma^2} X^{\top} X
+J= -X, \quad  H=\frac{1}{\sigma^2} X^{\top} X, \quad I = \frac{1}{\sigma^2} X^{\top} X
 $$
 
 
